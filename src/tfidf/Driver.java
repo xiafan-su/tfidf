@@ -25,7 +25,8 @@ public class Driver {
 					"TF-IDF 2 --- Word Counts In Documents");
 			pgd.addClass("tf-idf-3", WordsInCorpusTFIDF.class,
 					"TF-IDF 3 --- Word in Corpus and TF-IDF");
-
+			pgd.addClass("tf-idf-4", WordKeywordSelectedByTFIDF.class,
+					"TF-IDF 4 --- Keyword in song");
 			// Execute the appropriate class
 			pgd.driver(args);
 

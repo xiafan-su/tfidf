@@ -31,7 +31,7 @@ public class WordFrequenceInDocMapper extends
 
 	static {
 		googleStopwords = new HashSet<String>();
-		googleStopwords.add("I");
+		googleStopwords.add("i");
 		googleStopwords.add("a");
 		googleStopwords.add("about");
 		googleStopwords.add("an");
@@ -90,12 +90,15 @@ public class WordFrequenceInDocMapper extends
 	public void map(LongWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
 
+		// Find the song id
+		String[] tokens=value.toString().split(",",3);
+		String songId=tokens[1];
 		// Match all words in the line
-		Matcher m = pattern.matcher(value.toString());
+		Matcher m = pattern.matcher(tokens[2]);
 
 		// Get the name of the file from the inputsplit in the context
-		String fileName = ((FileSplit) context.getInputSplit()).getPath()
-				.getName();
+		//String fileName = ((FileSplit) context.getInputSplit()).getPath()
+		//		.getName();
 
 		// build the values and write <k,v> pairs through the context
 		while (m.find()) {
@@ -106,13 +109,14 @@ public class WordFrequenceInDocMapper extends
 			if (!Character.isLetter(matchedKey.charAt(0))
 					|| Character.isDigit(matchedKey.charAt(0))
 					|| googleStopwords.contains(matchedKey)
-					|| matchedKey.contains("_")) {
+					|| matchedKey.contains("_")
+					|| (matchedKey.length() <8))	{
 				continue;
 			}
 			valueBuilder.delete(0, valueBuilder.length());
 			valueBuilder.append(matchedKey);
 			valueBuilder.append("@");
-			valueBuilder.append(fileName);
+			valueBuilder.append(songId);
 
 			// emit the partial <k,v>
 			INTERM_KEY.set(valueBuilder.toString());

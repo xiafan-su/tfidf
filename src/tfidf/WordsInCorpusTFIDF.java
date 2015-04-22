@@ -31,9 +31,9 @@ public class WordsInCorpusTFIDF extends Configured implements Tool {
 
 	public int run(String[] args) throws Exception {
 
-		if (args.length != 3) {
+		if (args.length != 5) {
 			System.out
-					.println("Usage: tf-idf-3 <doc-input> <tf-idf-2-output> <output>");
+					.println("Usage: tf-idf-3 <doc-input> <tf-idf-2-output> <output> num");
 			System.exit(-1);
 		}
 
@@ -44,7 +44,9 @@ public class WordsInCorpusTFIDF extends Configured implements Tool {
 		job.setJarByClass(WordsInCorpusTFIDF.class);
 		job.setMapperClass(WordsInCorpusTFIDFMapper.class);
 		job.setReducerClass(WordsInCorpusTFIDFReducer.class);
-
+		int reduceNum = 1;
+		reduceNum = Integer.parseInt(args[4].split(",")[2]);
+		job.setNumReduceTasks(reduceNum);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 
@@ -52,7 +54,7 @@ public class WordsInCorpusTFIDF extends Configured implements Tool {
 		FileOutputFormat.setOutputPath(job, new Path(args[2]));
 
 		// Getting the number of documents from the original input directory.
-		Path inputPath = new Path(args[0]);
+		/*Path inputPath = new Path(args[0]);
 		FileSystem fs = inputPath.getFileSystem(conf);
 		FileStatus[] matches = fs.globStatus(inputPath);
 		if (matches == null || matches.length == 0)
@@ -66,7 +68,8 @@ public class WordsInCorpusTFIDF extends Configured implements Tool {
 				docsInCoprus += 1;
 			}
 
-		}
+		}*/
+		int docsInCoprus = Integer.parseInt(args[3]);
 		conf.setInt("docsInCorpus", docsInCoprus);
 
 		return job.waitForCompletion(true) ? 0 : 1;

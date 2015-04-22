@@ -6,16 +6,11 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-/**
- * WordsInCorpusTFIDFMapper implements the Job 3 specification for the TF-IDF
- * algorithm
- * 
- * @author Marcello de Sales (marcello.desales@gmail.com)
- */
-public class WordsInCorpusTFIDFMapper extends
-		Mapper<LongWritable, Text, Text, Text> {
+public class WordKeywordSelectedByTFIDFMapper extends Mapper<LongWritable, Text, Text, Text> {
 
-	public WordsInCorpusTFIDFMapper() {
+	public WordKeywordSelectedByTFIDFMapper()
+	{
+		
 	}
 
 	// Reuse writables
@@ -23,9 +18,9 @@ public class WordsInCorpusTFIDFMapper extends
 	private static Text INTERM_VALUE = new Text();
 
 	/**
-	 * PRE-CONDITION: marcello@book.txt \t 3/1500
+	 * PRE-CONDITION: youtube@B000P3A55M \t [13/10202 , 1/578 , 0.0050082]
 	 * 
-	 * POST-CONDITION: marcello, book.txt=3/1500
+	 * POST-CONDITION: key:B000P3A55M value:
 	 * 
 	 * @param key
 	 *            is the byte offset of the current line in the file;
@@ -40,9 +35,16 @@ public class WordsInCorpusTFIDFMapper extends
 
 		String[] wordAndCounters = value.toString().split("\t");
 		String[] wordAndDoc = wordAndCounters[0].split("@");
-
-		INTERM_KEY.set(wordAndDoc[0]);
-		INTERM_VALUE.set(wordAndDoc[1] + "=" + wordAndCounters[1]);
+		
+		
+		String parameter=wordAndCounters[1].substring(1, wordAndCounters[1].length()-2);
+		String tfidf=parameter.split(",")[2].trim();
+		
+		//key:songid value: word=0.04
+		INTERM_KEY.set(wordAndDoc[1]);
+		INTERM_VALUE.set(wordAndDoc[0] + "=" + tfidf);
 		context.write(INTERM_KEY, INTERM_VALUE);
 	}
+
+
 }

@@ -11,13 +11,12 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * WordCountsForDocs counts the total number of words in each document and
- * produces data with the relative and total number of words for each document.
+ * WordKeywordSelectedByTFIDF selects the keywords in each document 
  * (Hadoop 0.20.2 API)
  * 
- * @author Marcello de Sales (marcello.desales@gmail.com)
+ * @author Demonsu (xiafan@hku.hk)
  */
-public class WordCountsForDocs extends Configured implements Tool {
+public class WordKeywordSelectedByTFIDF extends Configured implements Tool {
 
 	/**
 	 * Setup the MR job
@@ -25,22 +24,21 @@ public class WordCountsForDocs extends Configured implements Tool {
 	 * @param args
 	 * @throws Exception
 	 */
-
 	public int run(String[] args) throws Exception {
 
 		if (args.length != 3) {
-			System.out.println("Usage: tf-idf-2 <tf-idf-1-output> <tf-idf-2-output>");
+			System.out.println("Usage: tf-idf-4 <tf-idf-1-output> <tf-idf-2-output>");
 			System.exit(-1);
 		}
 
 		Configuration conf = getConf();
-		Job job = new Job(conf, "Words Counts for Docs");
+		Job job = new Job(conf, "Select Keywords");
 
-		job.setJarByClass(WordCountsForDocs.class);
-		job.setMapperClass(WordCountsForDocsMapper.class);
-		job.setReducerClass(WordCountsForDocsReducer.class);
+		job.setJarByClass(WordKeywordSelectedByTFIDF.class);
+		job.setMapperClass(WordKeywordSelectedByTFIDFMapper.class);
+		job.setReducerClass(WordKeywordSelectedByTFIDFReducer.class);
 		int reduceNum = 1;
-		reduceNum = Integer.parseInt(args[2].split(",")[1]);
+		reduceNum = Integer.parseInt(args[2].split(",")[3]);
 		job.setNumReduceTasks(reduceNum);
 		
 		job.setOutputKeyClass(Text.class);
@@ -58,10 +56,10 @@ public class WordCountsForDocs extends Configured implements Tool {
 	 * @param args
 	 * @throws Exception
 	 */
-
 	public static void main(String[] args) throws Exception {
-		int res = ToolRunner.run(new Configuration(), new WordCountsForDocs(),
+		int res = ToolRunner.run(new Configuration(), new WordKeywordSelectedByTFIDF(),
 				args);
 		System.exit(res);
 	}
+
 }

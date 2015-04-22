@@ -57,5 +57,5 @@ printf "\nExecuting Job 3: Docs In Corpus and TF-IDF\n"
 ${HADOOP_HOME}/bin/hadoop jar tfidf.jar tf-idf-3 $CONFIG $INPUT $OUTPUT/tfidf2 $OUTPUT/tfidf3 $SONGNUM $REDUCENUM
 
 printf "\nExecuting Job 4: Select keyword by TF-IDF\n"
-${HADOOP_HOME}/bin/hadoop jar tfidf.jar tf-idf-4 $CONFIG $OUTPUT/tfidf3 $OUTPUT/tfidf4 $REDUCENUM
+${HADOOP_HOME}/bin/hadoop jar tfidf.jar tf-idf-4 $CONFIG $INPUT $OUTPUT/tfidf3 $OUTPUT/tfidf4 $SONGNUM $REDUCENUM
 

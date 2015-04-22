@@ -29,7 +29,7 @@ public class WordFrequenceInDoc extends Configured implements Tool {
 	 */
 	public int run(String[] args) throws Exception {
 
-		if (args.length != 2) {
+		if (args.length != 3) {
 			System.out.println("Usage: tf-idf-1 <doc-input> <tf-idf-1-output>");
 			System.exit(-1);
 		}
@@ -41,7 +41,10 @@ public class WordFrequenceInDoc extends Configured implements Tool {
 		job.setMapperClass(WordFrequenceInDocMapper.class);
 		job.setReducerClass(WordFrequenceInDocReducer.class);
 		job.setCombinerClass(WordFrequenceInDocReducer.class);
-
+		int reduceNum = 1;
+		reduceNum = Integer.parseInt(args[2].split(",")[0]);
+		job.setNumReduceTasks(reduceNum);
+		
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 
