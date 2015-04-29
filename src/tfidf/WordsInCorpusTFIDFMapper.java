@@ -6,12 +6,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-/**
- * WordsInCorpusTFIDFMapper implements the Job 3 specification for the TF-IDF
- * algorithm
- * 
- * @author Marcello de Sales (marcello.desales@gmail.com)
- */
+
 public class WordsInCorpusTFIDFMapper extends
 		Mapper<LongWritable, Text, Text, Text> {
 

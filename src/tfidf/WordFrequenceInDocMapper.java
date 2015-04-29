@@ -77,16 +77,6 @@ public class WordFrequenceInDocMapper extends
 	private static IntWritable ONE = new IntWritable(1);
 	private static StringBuilder valueBuilder = new StringBuilder();
 
-	/**
-	 * POST-CONDITION: Output <"word", "filename@offset"> pairs
-	 * 
-	 * @param key
-	 *            is the byte offset of the current line in the file;
-	 * @param value
-	 *            is the line from the file
-	 * @param context
-	 *            contains the context of the job run
-	 */
 	public void map(LongWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
 

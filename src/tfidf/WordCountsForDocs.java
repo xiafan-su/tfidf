@@ -10,21 +10,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-/**
- * WordCountsForDocs counts the total number of words in each document and
- * produces data with the relative and total number of words for each document.
- * (Hadoop 0.20.2 API)
- * 
- * @author Marcello de Sales (marcello.desales@gmail.com)
- */
+
 public class WordCountsForDocs extends Configured implements Tool {
 
-	/**
-	 * Setup the MR job
-	 * 
-	 * @param args
-	 * @throws Exception
-	 */
+
 
 	public int run(String[] args) throws Exception {
 
@@ -52,12 +41,7 @@ public class WordCountsForDocs extends Configured implements Tool {
 		return job.waitForCompletion(true) ? 0 : 1;
 	}
 
-	/**
-	 * Main driver
-	 * 
-	 * @param args
-	 * @throws Exception
-	 */
+
 
 	public static void main(String[] args) throws Exception {
 		int res = ToolRunner.run(new Configuration(), new WordCountsForDocs(),

@@ -13,20 +13,9 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-/**
- * WordFrequenceInDoc Creates the index of the words in documents, mapping each
- * of them to their frequency. (Hadoop 0.20.2 API)
- * 
- * @author Marcello de Sales (marcello.desales@gmail.com)
- */
+
 public class WordFrequenceInDoc extends Configured implements Tool {
 
-	/**
-	 * Setup the MR job
-	 * 
-	 * @param args
-	 * @throws Exception
-	 */
 	public int run(String[] args) throws Exception {
 
 		if (args.length != 3) {
@@ -54,12 +43,7 @@ public class WordFrequenceInDoc extends Configured implements Tool {
 		return job.waitForCompletion(true) ? 0 : 1;
 	}
 
-	/**
-	 * Main driver
-	 * 
-	 * @param args
-	 * @throws Exception
-	 */
+
 	public static void main(String[] args) throws Exception {
 		int res = ToolRunner.run(new Configuration(), new WordFrequenceInDoc(),
 				args);

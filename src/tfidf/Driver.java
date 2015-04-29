@@ -2,16 +2,10 @@ package tfidf;
 
 import org.apache.hadoop.util.ProgramDriver;
 
-/**
- * A driver class to initiate the appropriate job based on the user's input.
- * 
- * @author hero
- */
+
 public class Driver {
 
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 
 		int exitCode = -1;
