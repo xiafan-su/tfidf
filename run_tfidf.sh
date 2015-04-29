@@ -1,28 +1,3 @@
-#!/usr/bin/env bash
-
-###############################################################################
-# This script is used to perform TF-IDF as a sequence of 3 MapReduce jobs.
-#
-# Usage:
-#    ./run_tfidf.sh <input_dir> <output_dir> [conf]
-#  
-#  where:
-#     input_dir  = HDFS Directory with the input files
-#     output_dir = HDFS Directory to place the output
-#     conf       = Hadoop configuration options
-#     songnum	 = Total number of songs
-# This script will create three directories under <output_dir>, namely,
-# tfidf1, tfidf2, and tfidf3, to place to output from each MR job.
-#
-# Examples:
-#    ./run_tfidf.sh ~/input ~/output "-conf=myconf.xml" 20000
-#    ./run_tfidf.sh ~/input ~/output "-Dmapred.reduce.tasks=2" 20000
-#
-# Author: Herodotos Herodotou
-# Date: November 5, 2010
-##############################################################################
-
-
 # Make sure we have all the arguments
 if [ $# -ne 5 ]; then
    printf "./run_tfidf.sh <input_dir> <output_dir> [conf] num\n"
