@@ -1,5 +1,4 @@
-// (c) Copyright 2009 Cloudera, Inc.
-// Hadoop 0.20.1 API Updated by Marcello de Sales (marcello.desales@gmail.com)
+
 package tfidf;
 
 import org.apache.hadoop.conf.Configuration;
